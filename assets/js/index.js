@@ -40,4 +40,6 @@ function start(){
     var month = today.getMonth() + 1;
     setTimeout(start, 1000);
     document.getElementById('welcome-message').innerHTML = k;    // display the date and time
+    document.getElementById('age').innerHTML =  today.getFullYear() - 2000;
 }
+

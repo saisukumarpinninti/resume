@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,13 +18,14 @@
             color: #333;
         }
 
-        #table-container {
+        .table-container {
             margin: 20px;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             overflow-x: auto;
+            margin-bottom: 40px;
         }
 
         table {
@@ -57,50 +57,76 @@
 </head>
 <body>
     <h2>Expense Data</h2>
-    <div id="table-container">
+    <div id="table-container1" class="table-container">
+        <!-- CSV data will be inserted here -->
+    </div>
+    <div id="table-container2" class="table-container">
         <!-- CSV data will be inserted here -->
     </div>
 
     <script>
-        // Replace the URL with your actual CSV URL
-        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPiOjHOQ9KVK1ooTH_YMpRrChALMgSgN6g6wylJANwdujMhfnZqamC6bYFMrktwBmiZ3HxtsHaSb5d/pub?gid=0&single=true&output=csv';
+        // Replace the URLs with your actual CSV URLs
+        const csvUrls = [
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPiOjHOQ9KVK1ooTH_YMpRrChALMgSgN6g6wylJANwdujMhfnZqamC6bYFMrktwBmiZ3HxtsHaSb5d/pub?gid=488666427&single=true&output=csv',
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPiOjHOQ9KVK1ooTH_YMpRrChALMgSgN6g6wylJANwdujMhfnZqamC6bYFMrktwBmiZ3HxtsHaSb5d/pub?gid=0&single=true&output=csv'
+        ];
 
-        fetch(csvUrl)
-            .then(response => response.text())
-            .then(data => {
-                const rows = data.split('\n');
-                const tableContainer = document.getElementById('table-container');
-                const table = document.createElement('table');
+        csvUrls.forEach((url, index) => {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const rows = data.split('\n');
+                    const tableContainer = document.getElementById(`table-container${index + 1}`);
+                    const table = document.createElement('table');
 
-                // Create the table header
-                const headerRow = document.createElement('tr');
-                const headers = rows[0].split(',');
-                headers.forEach(headerText => {
-                    const header = document.createElement('th');
-                    header.textContent = headerText;
-                    headerRow.appendChild(header);
-                });
-                table.appendChild(headerRow);
+                    // Create the table header
+                    const headerRow = document.createElement('tr');
+                    const headers = parseCSVRow(rows[0]);
+                    headers.forEach(headerText => {
+                        const header = document.createElement('th');
+                        header.textContent = headerText;
+                        headerRow.appendChild(header);
+                    });
+                    table.appendChild(headerRow);
 
-                // Create the table rows
-                for (let i = 1; i < rows.length; i++) {
-                    const rowData = rows[i].split(',');
-                    if (rowData.length === headers.length) {
+                    // Create the table rows
+                    for (let i = rows.length - 1; i > 0; i--) {
+                        const rowDataArray = parseCSVRow(rows[i]);
                         const row = document.createElement('tr');
-                        rowData.forEach(cellData => {
+                        rowDataArray.forEach(cellData => {
                             const cell = document.createElement('td');
                             cell.textContent = cellData;
                             row.appendChild(cell);
                         });
                         table.appendChild(row);
                     }
-                }
 
-                tableContainer.appendChild(table);
-            })
-            .catch(error => {
-                console.error('Error fetching CSV data:', error);
+                    tableContainer.appendChild(table);
+                })
+                .catch(error => {
+                    console.error('Error fetching CSV data:', error);
+                });
+        });
+
+        function parseCSVRow(rowData) {
+            const delimiter = ',';
+            const quotedValues = rowData.match(/("[^"]*")/g) || [];
+            const rowDataArray = [];
+            let currentIndex = 0;
+
+            quotedValues.forEach(quotedValue => {
+                const quotedIndex = rowData.indexOf(quotedValue, currentIndex);
+                const nonQuotedPart = rowData.substring(currentIndex, quotedIndex).split(delimiter);
+                rowDataArray.push(...nonQuotedPart.filter(Boolean));
+                rowDataArray.push(quotedValue.replace(/"/g, ''));
+                currentIndex = quotedIndex + quotedValue.length;
             });
+
+            const remainingPart = rowData.substring(currentIndex).split(delimiter);
+            rowDataArray.push(...remainingPart.filter(Boolean));
+
+            return rowDataArray;
+        }
     </script>
 </body>
 </html>

@@ -561,7 +561,7 @@ ul #techs li {
 /* Dark mode button */
 /* Dark mode button */
 #darkModeToggle {
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
   background-color: var(--primary-color); /* Dark mode button background color */

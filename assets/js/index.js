@@ -43,3 +43,8 @@ function start(){
     document.getElementById('age').innerHTML =  today.getFullYear() - 2000;
 }
 
+const toggleButton = document.getElementById('darkModeToggle');
+
+toggleButton.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+});

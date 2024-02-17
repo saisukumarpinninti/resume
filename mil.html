@@ -4,171 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milage Tracker Meteor 350</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link href="assets/css/style.css" rel="stylesheet">
     <style>
-     body {
-    font-family: Arial, sans-serif;
-    color: #ffffff; /* Gold text color */
-    margin: 0;
-    padding: 0;
-    background-image: url('https://www.royalenfield.com/content/dam/royal-enfield/meteor-new/section8/new/MatteBlk/J1D2_MatteBlk_000.jpg'); /* Background texture */
-}
+        body {
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.royalenfield.com/content/dam/royal-enfield/meteor-new/section8/new/MatteBlk/J1D2_MatteBlk_000.jpg');
+        }
 
-h2 {
-    text-align: center;
-    color: #FFD700; /* Gold text color */
-    padding-top: 20px; /* Add some space above the heading */
-    animation: fadeInUp 1s ease-in-out; /* Apply animation */
-}
+        h2 {
+            text-align: center;
+            color: #FFD700;
+            padding-top: 20px;
+            animation: fadeInUp 1s ease-in-out;
+        }
 
-.table-container {
-    margin: 20px auto;
-    padding: 20px;
-    background-color: rgba(46, 25, 25, 0.991); /* Semi-transparent white background */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 15px; /* Rounded corners */
-    overflow-x: auto;
-    margin-bottom: 30px;
-    animation: slideIn 1s ease-in-out; /* Apply animation */
-}
+        .table-container {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(46, 25, 25, 0.991);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            overflow-x: auto;
+            margin-bottom: 30px;
+            animation: slideIn 1s ease-in-out;
+        }
 
-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 10px;
-}
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 10px;
+        }
 
-th, td {
-    text-align: center;
-    padding: 15px;
-}
+        th, td {
+            text-align: center;
+            padding: 15px;
+        }
 
+        th {
+            background-color: rgba(5, 15, 74, 0.374);
+            color: #FFD700;
+        }
 
-th {
-    background-color: rgba(5, 15, 74, 0.374); /* Dark blue background color */
-    color: #FFD700; /* Gold text color */
-}
+        tr:nth-child(odd) {
+            background-color: #2f2526af;
+        }
 
-tr:nth-child(odd) {
-    background-color: #2f2526af; /* Darker blue background color for even rows */
-}
-td:hover {
-    background-color: #1c6e03; /* Dark blue hover effect */
-    color: rgb(255, 245, 245);
-    transition: background-color 0.8s,color 0.8s;
-}
-tr:hover {
-    background-color: #f9fdff; /* Dark blue hover effect */
-    color: #000;
-    transition: background-color 0.8s,color 0.8s;
-}
+        td:hover {
+            background-color: #1c6e03;
+            color: rgb(255, 245, 245);
+            transition: background-color 0.8s, color 0.8s;
+        }
 
-@keyframes fadeInOut {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+        tr:hover {
+            background-color: #f9fdff;
+            color: #000;
+            transition: background-color 0.8s, color 0.8s;
+        }
 
-/* Animation Keyframes */
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
 
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
+        /* Media Query for Mobile View */
+        @media only screen and (max-width: 600px) {
+            .table-container {
+                padding: 10px;
+            }
+            th, td {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h2>Milage Tracker Meteor 350</h2>
-    <div id="table-container1" class="table-container">
-        <!-- CSV data will be inserted here -->
-    </div>
-    <div id="table-container2" class="table-container">
-        <!-- CSV data will be inserted here -->
-    </div>
+<h2>Milage Tracker Meteor 350</h2>
+<div id="table-container1" class="table-container">
+    <!-- CSV data will be inserted here -->
+</div>
+<div id="table-container2" class="table-container">
+    <!-- CSV data will be inserted here -->
+</div>
 
-    <script>
-        // Replace the URLs with your actual CSV URLs
-        const csvUrls = [
-            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPiOjHOQ9KVK1ooTH_YMpRrChALMgSgN6g6wylJANwdujMhfnZqamC6bYFMrktwBmiZ3HxtsHaSb5d/pub?gid=488666427&single=true&output=csv',
-            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPiOjHOQ9KVK1ooTH_YMpRrChALMgSgN6g6wylJANwdujMhfnZqamC6bYFMrktwBmiZ3HxtsHaSb5d/pub?gid=0&single=true&output=csv'
-        ];
+<script>
+    // Replace the URLs with your actual CSV URLs
+    const csvUrls = [
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPiOjHOQ9KVK1ooTH_YMpRrChALMgSgN6g6wylJANwdujMhfnZqamC6bYFMrktwBmiZ3HxtsHaSb5d/pub?gid=488666427&single=true&output=csv',
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPiOjHOQ9KVK1ooTH_YMpRrChALMgSgN6g6wylJANwdujMhfnZqamC6bYFMrktwBmiZ3HxtsHaSb5d/pub?gid=0&single=true&output=csv'
+    ];
 
-        csvUrls.forEach((url, index) => {
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    const rows = data.split('\n');
-                    const tableContainer = document.getElementById(`table-container${index + 1}`);
-                    const table = document.createElement('table');
+    csvUrls.forEach((url, index) => {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n');
+                const tableContainer = document.getElementById(`table-container${index + 1}`);
+                const table = document.createElement('table');
 
-                    // Create the table header
-                    const headerRow = document.createElement('tr');
-                    const headers = parseCSVRow(rows[0]);
-                    headers.forEach(headerText => {
-                        const header = document.createElement('th');
-                        header.textContent = headerText;
-                        headerRow.appendChild(header);
-                    });
-                    table.appendChild(headerRow);
-
-                    // Create the table rows
-                    for (let i = rows.length - 1; i > 0; i--) {
-                        const rowDataArray = parseCSVRow(rows[i]);
-                        const row = document.createElement('tr');
-                        rowDataArray.forEach(cellData => {
-                            const cell = document.createElement('td');
-                            cell.textContent = cellData;
-                            row.appendChild(cell);
-                        });
-                        table.appendChild(row);
-                    }
-
-                    tableContainer.appendChild(table);
-                })
-                .catch(error => {
-                    console.error('Error fetching CSV data:', error);
+                // Create the table header
+                const headerRow = document.createElement('tr');
+                const headers = parseCSVRow(rows[0]);
+                headers.forEach(headerText => {
+                    const header = document.createElement('th');
+                    header.textContent = headerText;
+                    headerRow.appendChild(header);
                 });
+                table.appendChild(headerRow);
+
+                // Create the table rows
+                for (let i = rows.length - 1; i > 0; i--) {
+                    const rowDataArray = parseCSVRow(rows[i]);
+                    const row = document.createElement('tr');
+                    rowDataArray.forEach(cellData => {
+                        const cell = document.createElement('td');
+                        cell.textContent = cellData;
+                        row.appendChild(cell);
+                    });
+                    table.appendChild(row);
+                }
+
+                tableContainer.appendChild(table);
+            })
+            .catch(error => {
+                console.error('Error fetching CSV data:', error);
+            });
+    });
+
+    function parseCSVRow(rowData) {
+        const delimiter = ',';
+        const quotedValues = rowData.match(/("[^"]*")/g) || [];
+        const rowDataArray = [];
+        let currentIndex = 0;
+
+        quotedValues.forEach(quotedValue => {
+            const quotedIndex = rowData.indexOf(quotedValue, currentIndex);
+            const nonQuotedPart = rowData.substring(currentIndex, quotedIndex).split(delimiter);
+            rowDataArray.push(...nonQuotedPart.filter(Boolean));
+            rowDataArray.push(quotedValue.replace(/"/g, ''));
+            currentIndex = quotedIndex + quotedValue.length;
         });
 
-        function parseCSVRow(rowData) {
-            const delimiter = ',';
-            const quotedValues = rowData.match(/("[^"]*")/g) || [];
-            const rowDataArray = [];
-            let currentIndex = 0;
+        const remainingPart = rowData.substring(currentIndex).split(delimiter);
+        rowDataArray.push(...remainingPart.filter(Boolean));
 
-            quotedValues.forEach(quotedValue => {
-                const quotedIndex = rowData.indexOf(quotedValue, currentIndex);
-                const nonQuotedPart = rowData.substring(currentIndex, quotedIndex).split(delimiter);
-                rowDataArray.push(...nonQuotedPart.filter(Boolean));
-                rowDataArray.push(quotedValue.replace(/"/g, ''));
-                currentIndex = quotedIndex + quotedValue.length;
-            });
-
-            const remainingPart = rowData.substring(currentIndex).split(delimiter);
-            rowDataArray.push(...remainingPart.filter(Boolean));
-
-            return rowDataArray;
-        }
-    </script>
+        return rowDataArray;
+    }
+</script>
 </body>
 </html>

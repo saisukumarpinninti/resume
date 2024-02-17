@@ -281,7 +281,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/hero-bg.jpg") top right no-repeat;
+  background: url("../img/hero-bg.PNG") top right no-repeat;
   background-size: cover;
   position: relative;
 }
@@ -561,7 +561,7 @@ ul #techs li {
 /* Dark mode button */
 /* Dark mode button */
 #darkModeToggle {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
   background-color: var(--primary-color); /* Dark mode button background color */
@@ -577,6 +577,7 @@ ul #techs li {
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s ease; /* Smooth transition for background color */
+  z-index: 1000; /* Ensure it's above the background */
 }
 
 /* Dark mode button hover effect */
